@@ -36,3 +36,26 @@ class Solution(object):
             new_node.next = self.reverseList(head)
             return new_node
             
+
+# class Solution(object):
+#     def reverseList(self, head):
+#         """
+#         :type head: ListNode
+#         :rtype: ListNode
+#         """
+#         if head is None:
+#             return None
+#         elif head.next is None:
+#             return head
+#         else:
+#             current = head
+#             new_one = None
+#             second = None
+            
+#             while current:
+#                 second = current.next
+#                 current.next = new_one
+#                 new_one = current
+#                 current = second
+
+#             return new_one
