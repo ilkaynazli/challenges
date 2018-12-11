@@ -18,12 +18,20 @@ class Solution:
         :rtype: void Do not return anything, modify nums in-place instead.
         """
         
-        j = 0
-        while j < len(nums) - 1:
-            i = 0
-            while i < len(nums)-1:
-                if nums[i] == 0:
-                    nums[i], nums[i+1] = nums[i+1], nums[i]
-                i += 1
+        # j = 0
+        # while j < len(nums) - 1:
+        #     i = 0
+        #     while i < len(nums)-1:
+        #         if nums[i] == 0:
+        #             nums[i], nums[i+1] = nums[i+1], nums[i]
+        #         i += 1
 
-            j += 1
+        #     j += 1
+
+        fast = 0
+        slow = 0
+        while fast < len(nums):
+            if nums[fast] is not 0:
+                nums[slow], nums[fast] = nums[fast], nums[slow]
+                slow += 1
+            fast += 1
