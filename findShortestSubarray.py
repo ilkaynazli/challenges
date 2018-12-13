@@ -48,4 +48,14 @@ class Solution:
                 result = min(result, end[k] - start[k] + 1)
         return result
         
+        """
+        faster solution
         
+        counter = collections.Counter(nums)
+        reversed_nums = nums[::-1]
+        max_freq = max(counter.values())
+        if max_freq <= 1:
+            return 1
+        return min(len(nums) - reversed_nums.index(val) - nums.index(val) for (val, count) in counter.items() if count == max_freq)
+
+        """
