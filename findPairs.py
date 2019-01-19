@@ -28,12 +28,19 @@ class Solution:
         :type k: int
         :rtype: int
         """
+        if k < 0:
+            return 0
+        nums.sort()
         result = set()
+        i = 0
         
-        for i in range(len(nums)):
-            for j in range(i+1, len(nums)):
-                if abs(nums[i] - nums[j]) == abs(k):
-                    x = min(nums[i], nums[j])
-                    y = max(nums[i], nums[j])
-                    result.add((x,y))
+        while i < len(nums) - 1:
+            j = i + 1
+            while j < len(nums):
+                if nums[j] - nums[i] == k:
+                    result.add((nums[i], nums[j]))
+                j += 1
+            i += 1
+        
+        # print(result)
         return len(result)

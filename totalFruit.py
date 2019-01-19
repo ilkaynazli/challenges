@@ -50,6 +50,25 @@ class Solution:
         :type tree: List[int]
         :rtype: int
         """
+
+
+        result = 0
+        i = 0
+        count = collections.Counter()
+        for j, num in enumerate(tree):
+            count[num] += 1
+            print(count)
+            while len(count) >= 3:
+                count[tree[i]] -= 1
+                if count[tree[i]] == 0:
+                    del count[tree[i]]
+                i += 1
+            result = max(result, j - i + 1)
+        
+        return result      
+       
+
+     """   
         maxx = 0
         i = 0
         while i < len(tree):
@@ -68,3 +87,4 @@ class Solution:
             i += 1
         
         return maxx
+    """
