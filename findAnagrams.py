@@ -61,3 +61,23 @@ class Solution:
             i += 1
             
         return result
+
+"""
+class Solution:
+    def helper(self, s, p, i):
+        n = len(p)
+        c_p = collections.Counter(p)
+        c_s = collections.Counter(s[i:i+n])
+        return c_s == c_p
+        
+    def findAnagrams(self, s, p):
+
+        result = []
+        i = 0
+        while i <= len(s) - len(p):
+            if self.helper(s, p ,i):
+                result.append(i)
+            i += 1
+        return result
+            
+"""
