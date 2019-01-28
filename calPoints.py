@@ -38,7 +38,6 @@ Every integer represented in the list will be between -30000 and 30000.
 """
 
 class Solution(object):
-class Solution(object):
     def calPoints(self, ops):
         """
         :type ops: List[str]
