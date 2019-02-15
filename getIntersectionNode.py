@@ -26,24 +26,62 @@ Your code should preferably run in O(n) time and use only O(1) memory.
 #         self.val = x
 #         self.next = None
 
+
 class Solution(object):
     def getIntersectionNode(self, headA, headB):
         """
         :type head1, head1: ListNode
         :rtype: ListNode
         """
-        llA_set = set()
-        if headA is None:
-            return None
-        current = headA
-        while current:
-            llA_set.add(current)
-            current = current.next
+        def length(head):
+            count = 0
+            current = head
+            while current:
+                count += 1
+                current = current.next
+            return count
+        
+        lA = length(headA)
+        lB = length(headB)
+        if lA > lB:
+            headA, headB = headB, headA
+        
+        dif = abs(lA - lB)
+        
         currentB = headB
-        while currentB:
-            if currentB in llA_set:
-                return currentB
+        while dif > 0:
+            currentB = currentB.next
+            dif -= 1
+        
+        currentA = headA
+        while currentA and currentB:
+            if currentA == currentB:
+                return currentA
+            currentA = currentA.next
             currentB = currentB.next
             
         return None
+
+
+
+# class Solution(object):
+#     def getIntersectionNode(self, headA, headB):
+#         """
+#         :type head1, head1: ListNode
+#         :rtype: ListNode
+#         """
+#         llA_set = set()
+#         if headA is None:
+#             return None
+#         current = headA
+#         while current:
+#             llA_set.add(current)
+#             current = current.next
+#         currentB = headB
+#         while currentB:
+#             if currentB in llA_set:
+#                 return currentB
+#             currentB = currentB.next
             
+#         return None
+#             
