@@ -39,26 +39,26 @@ letters consists of lowercase letters, and contains at least 2 unique letters.
 target is a lowercase letter.
 """
 
-class Solution(object):
-    def nextGreatestLetter(self, letters, target):
-        """
-        :type letters: List[str]
-        :type target: str
-        :rtype: str
-        """
-        if target >= letters[-1] or  target < letters[0]:
+class Solution:
+    def nextGreatestLetter(self, letters: List[str], target: str) -> str:
+        if target >= letters[-1] or target < letters[0]:
             return letters[0]
         
-        start = 0
-        end = len(letters) - 1
-        while start < end:
-            mid = (end - start) // 2 + start
-            if letters[mid] == target:
+        l = 0
+        r = len(letters) - 1
+        while l <= r:
+            mid = (l+r)//2
+            temp = letters[mid]
+            if temp == target:
                 break
-            elif letters[mid] > target:
-                end = mid                
+            elif temp > target:
+                r = mid - 1
             else:
-                start = mid + 1
-        
-        return letters[mid+1]
-            
+                l = mid + 1
+        # print(letters[mid], mid, r)
+        if letters[mid] == target:
+            r = mid
+        while r < len(letters):
+            if letters[r] > target:
+                return letters[r]
+            r += 1
