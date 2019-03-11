@@ -26,3 +26,12 @@ class Solution(object):
             j -= 1
         
         return ''.join(s)
+
+
+        # def helper(s, i, j):
+        #     if i >= j:
+        #         return
+        #     s[i], s[j] = s[j], s[i]
+        #     helper(s, i+1, j-1)
+        
+        # helper(s, 0, len(s)-1)
