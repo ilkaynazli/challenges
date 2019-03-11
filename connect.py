@@ -61,3 +61,29 @@ class Solution:
         helper(collections.deque([root]))
         
         return root
+
+#if not perfect tree
+# class Solution:
+#     def connect(self, root: 'Node') -> 'Node':
+#         if not root:
+#             return None
+        
+#         def helper(q):
+#             if not q:
+#                 return
+#             children = []
+#             while q:
+#                 cur = q.popleft()
+#                 if not q:
+#                     cur.next = None
+#                 else:
+#                     cur.next = q[0]
+#                 if cur.left:
+#                     children.append(cur.left)
+#                 if cur.right:
+#                     children.append(cur.right)
+#             helper(collections.deque(children))
+        
+#         helper(collections.deque([root]))
+        
+#         return root
