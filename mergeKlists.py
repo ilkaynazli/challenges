@@ -17,23 +17,26 @@ Output: 1->1->2->3->4->4->5->6
 #     def __init__(self, x):
 #         self.val = x
 #         self.next = None
-from queue import PriorityQueue
+import heapq
 
 class Solution:
     def mergeKLists(self, lists: List[ListNode]) -> ListNode:
+        if not lists:
+            return None
         
         head = cur = ListNode(0)
-        q = PriorityQueue()
-        for l in lists:
-            if l:
-                q.put((l.val, l))
-                
-        while q:
-            val, node = q.get()
+        heap = []
+        for i, node in enumerate(lists):
+            if node:
+                heapq.heappush(heap, (node.val, i))
+
+        while heap:
+            val, idx = heapq.heappop(heap)
             cur.next = ListNode(val)
             cur = cur.next
-            node = node.next
+            lists[idx] = lists[idx].next
+            node = lists[idx]
             if node:
-                q.put((node.val, node))
-                
+                heapq.heappush(heap, (node.val, idx))
+               
         return head.next

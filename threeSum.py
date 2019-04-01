@@ -22,21 +22,31 @@ class Solution:
         :type nums: List[int]
         :rtype: List[List[int]]
         """
-        result = set()
+        if len(nums) < 3:
+            return []
+        set_nums = set(nums)
+        if len(set_nums) == 1 and set_nums.pop() == 0:
+            return [[0,0,0]]
+        nums.sort()
         n = len(nums)
+        res = set()
         for i in range(n):
-            for j in range(n):
-                if i == j:
-                    continue
-                for k in range(n):
-                    if i == k or j == k:
-                        continue
-                    if nums[i] + nums[j] + nums[k] == 0:
-                        temp = [nums[i], nums[j], nums[k]]
-                        temp.sort()
-                        s = str(temp[0]) + ',' + str(temp[1]) + ',' + str(temp[2])
-                        result.add(s)
+            j = i + 1
+            k = n - 1
+            target = -1 * nums[i]
+            while j < k:
+                # print(i, j, k, target, nums[j], nums[k])
+                if nums[j] + nums[k] == target:
+                    temp = [-target, nums[j], nums[k]]
+                    s = str(temp[0]) + ',' + str(temp[1]) +' ,' + str(temp[2])
+                    res.add(s)
+                    j += 1
+                    k -= 1
+                elif nums[j] + nums[k] > target:
+                    k -= 1
+                else:
+                    j += 1
         ans = []
-        for s in result:
+        for s in res:
             ans.append([int(x) for x in s.split(',')])
         return ans
