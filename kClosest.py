@@ -40,18 +40,14 @@ class Solution(object):
         if not points or K == 0:
             return []
         
-        l1 = []
-        for i, j in points:
-            d = i*i + j*j
-            l2 = []
-            while l1 and l1[-1][0] < d:
-                l2.append(l1.pop())
-            l1.append((d, (i,j)))
-            while l2:
-                l1.append(l2.pop())
+        dist = [(i*i + j*j, [i,j]) for i,j in points]
         
+        h = []
+        for d in dist:
+            heapq.heappush(h, d)
+
         ans = []
-        while K > 0:
-            ans.append(l1.pop()[1])
-            K -= 1
+        for i in range(K):
+            ans.append(heapq.heappop(h)[1])
+            
         return ans
