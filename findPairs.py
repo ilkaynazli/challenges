@@ -28,19 +28,36 @@ class Solution:
         :type k: int
         :rtype: int
         """
+        
+        def binary(i, target):
+            l = i
+            r = len(nums)
+            while l < r:
+                mid = (l+r)//2
+                if nums[mid] == target:
+                    return True
+                elif nums[mid] > target:
+                    r = mid
+                else:
+                    l = mid + 1
+            return False
+            
         if k < 0:
             return 0
+        
         nums.sort()
         result = set()
-        i = 0
+        seen = set()
         
-        while i < len(nums) - 1:
-            j = i + 1
-            while j < len(nums):
-                if nums[j] - nums[i] == k:
-                    result.add((nums[i], nums[j]))
-                j += 1
-            i += 1
+        for i in range(len(nums)):
+            if nums[i] in seen:
+                continue
+            target = k+nums[i]
+
+            if target > nums[-1]:
+                break
+            seen.add(nums[i])
+            if binary(i+1, target):
+                result.add((nums[i], target))
         
-        # print(result)
         return len(result)

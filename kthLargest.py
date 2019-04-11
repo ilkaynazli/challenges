@@ -24,22 +24,38 @@ class KthLargest:
         :type k: int
         :type nums: List[int]
         """
-        if not nums:
-            self.nums = []
-        else:
-            self.nums = nums
+        self.nums = nums
         self.k = k
-        
+        self.heap = []
+        self.res = None
+        for num in self.nums:
+            heapq.heappush(self.heap, (-1 * num))
 
+        
+    def find_max_k(self):
+        n = self.k
+        temp = []
+        while n > 1:
+            temp.append(heapq.heappop(self.heap))
+            n -= 1        
+        target = heapq.heappop(self.heap)
+        heapq.heappush(self.heap, target)
+        while temp:
+            heapq.heappush(self.heap, temp.pop())
+        return -1 * target
+
+    
     def add(self, val):
         """
         :type val: int
         :rtype: int
         """
         self.nums.append(val)
-        lst = sorted(self.nums)
-        return lst[-self.k]
-
+        heapq.heappush(self.heap, -1 * val)
+        if not self.res or self.res < val:
+            self.res = self.find_max_k()
+        return self.res
+        
 
 # Your KthLargest object will be instantiated and called as such:
 # obj = KthLargest(k, nums)
