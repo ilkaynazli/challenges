@@ -17,14 +17,21 @@ class Solution(object):
         :type nums: List[int]
         :rtype: int
         """
-        # nums_s = set(range(len(nums) + 1))
-        # for num in nums:
-        #     if num in nums_s:
-        #         nums_s.remove(num)
-        # return nums_s.pop()
 
-        #  the faster way is
+        res = len(nums)
+        for i, num in enumerate(nums):
+            res ^= num
+            res ^= i
+        return res
+        
+        # # nums_s = set(range(len(nums) + 1))
+        # # for num in nums:
+        # #     if num in nums_s:
+        # #         nums_s.remove(num)
+        # # return nums_s.pop()
 
-        n = len(nums)
+        # #  the faster way is
 
-        return (n * (n + 1)) // 2 - sum(nums) 
+        # n = len(nums)
+
+        # return (n * (n + 1)) // 2 - sum(nums) 
